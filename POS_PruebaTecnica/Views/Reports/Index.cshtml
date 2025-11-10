@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="card">
+    <div class="card-header"> EXCEL</div>
+    <div class="card-body">
+        <form asp-action="ExportExcel" >
+            <div class="row">
+                <div class="col-3">
+                    <input type="date" class="form-control " name="fechaIni"/>
+                </div>
+                <div class="col-3">
+                    <input type="date" class="form-control " name="fechaFin" />
+                </div>
+                <div class="col-3"> 
+                    <select class="form-control selec2" name="tipo">
+                        <option value="1">Detallado</option>
+                        <option value="2">Consolidado</option>
+                    </select>
+                </div>
+                <div class="col-3"> 
+                    <button class="btn btn-primary w-100">Generar Excel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header"> PDF </div>
+    <div class="card-body">
+        <form asp-action="ExportPDF" >
+            <div class="row">
+                <div class="col-3">
+                    <input type="date" class="form-control " name="fechaIni"/>
+                </div>
+                <div class="col-3">
+                    <input type="date" class="form-control " name="fechaFin" />
+                </div>
+                <div class="col-3"> 
+                    <select class="form-control selec2" name="tipo">
+                        <option value="1">Detallado</option>
+                        <option value="2">Consolidado</option>
+                    </select>
+                </div>
+                <div class="col-3"> 
+                    <button class="btn btn-primary w-100">Generar PDF</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

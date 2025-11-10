@@ -1,9 +1,12 @@
 
 using Microsoft.AspNetCore.Localization;
+using OfficeOpenXml;
+using POS_PruebaTecnica.Models.Reports;
 using POS_PruebaTecnica.Models.ServiciosRest;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+ExcelPackage.License.SetNonCommercialPersonal("Testing");
 var defaultCulture = new CultureInfo("es-SV");
 var localizationOptions = new RequestLocalizationOptions
 {
@@ -22,6 +25,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<Login>();
 builder.Services.AddScoped<Producto_Service>();
 builder.Services.AddScoped<POS_Service>();
+builder.Services.AddScoped<Reportes_Service>();
+builder.Services.AddScoped<GenerarExcel>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 var app = builder.Build();
 

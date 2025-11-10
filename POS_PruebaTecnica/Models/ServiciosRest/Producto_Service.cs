@@ -5,13 +5,7 @@ namespace POS_PruebaTecnica.Models.ServiciosRest
     {
         string baseurl = "https://localhost:7171/api/";
         public async Task<List<Model_Productos>> GetProductos(string token)
-        {
-            /*
-             curl -X 'GET' \
-            'https://localhost:7171/api/Productos' \
-            -H 'accept: text/plain' \
-            -H 'Authorization: bearer '
-             */
+        { 
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
@@ -32,13 +26,7 @@ namespace POS_PruebaTecnica.Models.ServiciosRest
 
         }
         public async Task<Model_Productos> GetProducto(string token, int id)
-        {
-            /*
-             curl -X 'GET' \
-            'https://localhost:7171/api/Productos' \
-            -H 'accept: text/plain' \
-            -H 'Authorization: bearer '
-             */
+        { 
             var producto = new Model_Productos();
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
@@ -63,13 +51,7 @@ namespace POS_PruebaTecnica.Models.ServiciosRest
 
         }
         public async Task<Model_Productos> GetProductoCode(string token, string code)
-        {
-            /*
-             curl -X 'GET' \
-            'https://localhost:7171/api/Productos' \
-            -H 'accept: text/plain' \
-            -H 'Authorization: bearer '
-             */
+        { 
             var producto = new Model_Productos();
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
