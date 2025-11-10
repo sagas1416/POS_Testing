@@ -241,7 +241,7 @@ namespace POS_PruebaTecnica.Controllers
         // POST: POSController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(string idVenta)
+        public async Task<ActionResult> Create(string idVenta, int tipo)
         {
             if (HttpContext.Session.GetString("Usuario") == null)
                 return RedirectToAction("Index", "Login");
@@ -251,8 +251,12 @@ namespace POS_PruebaTecnica.Controllers
                 {
                     var venta = System.Text.Json.JsonSerializer.Deserialize<Model_Venta>(HttpContext.Session.GetString("Venta")!);
                     var detalle = System.Text.Json.JsonSerializer.Deserialize<List<Transaccion_Detalle>>(HttpContext.Session.GetString("ProductoSeleccionado")!);
+
+                    venta.tipo = tipo;
                     var sales = new Sales();
+                   
                     sales.cabecera = venta!;
+                   
                     detalle.ForEach(x => x.fecha = DateTime.Now);
                     detalle.ForEach(x => x.nkey =0);
                     sales.detalle = detalle!;

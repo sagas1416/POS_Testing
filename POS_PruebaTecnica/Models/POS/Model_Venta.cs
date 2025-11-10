@@ -19,6 +19,7 @@ namespace POS_PruebaTecnica.Models.POS
         public decimal montoGrav { get; set; }
         public bool invalidado { get; set; }
         public string? idInvalidacion { get; set; }
+        public int tipo { get; set; }
     }
     public class Transaccion_Detalle
     {
