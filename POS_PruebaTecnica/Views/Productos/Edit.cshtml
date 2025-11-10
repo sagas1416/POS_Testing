@@ -5,53 +5,62 @@
 }
 
 <h1>Edit</h1>
-
-<h4>Model_Productos</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div>
+    <a asp-action="Index" class="btn btn-dark">Regresar</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="nkey" class="control-label"></label>
-                <input asp-for="nkey" class="form-control" />
-                <span asp-validation-for="nkey" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="codigo" class="control-label"></label>
-                <input asp-for="codigo" class="form-control" />
-                <span asp-validation-for="codigo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="descripcion" class="control-label"></label>
-                <input asp-for="descripcion" class="form-control" />
-                <span asp-validation-for="descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="precio" class="control-label"></label>
-                <input asp-for="precio" class="form-control" />
-                <span asp-validation-for="precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="inventario" class="control-label"></label>
-                <input asp-for="inventario" class="form-control" />
-                <span asp-validation-for="inventario" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="activo" /> @Html.DisplayNameFor(model => model.activo)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+        <div class="row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+                <input asp-for="nkey" type="hidden" class="form-control" /> 
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="codigo" class="control-label"></label>
+                        <input asp-for="codigo" class="form-control" />
+                        <span asp-validation-for="codigo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="descripcion" class="control-label"></label>
+                        <input asp-for="descripcion" class="form-control" />
+                        <span asp-validation-for="descripcion" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="precio" class="control-label"></label>
+                        <input asp-for="precio" class="form-control" />
+                        <span asp-validation-for="precio" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label asp-for="inventario" class="control-label"></label>
+                        <input asp-for="inventario" class="form-control" />
+                        <span asp-validation-for="inventario" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-control form-check-input" asp-for="activo" /> @Html.DisplayNameFor(model => model.activo)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
