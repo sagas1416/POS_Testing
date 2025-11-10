@@ -1,0 +1,113 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+<link href="~/css/styles.css?v1" rel="stylesheet" />
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Sales</title>
+    <link rel="shortcut icon" href="~/css/img/logosalespos.png">
+    <link href="~/css/csslogin.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Animación de fondo -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <div class="login-container">
+        <div class="login-header"> 
+            <p class="system-subtitle">Sistema de Venta</p>
+        </div>
+
+        <div class="@(ViewBag.Mensaje == null ? "welcome-message" : "error-message") ">
+            @if (ViewBag.Mensaje == null)
+            {
+                <label>¡Bienvenido! Ingresa tus credenciales para acceder al sistema de gestión.</label>
+            }
+            else
+            {
+                @ViewBag.Mensaje
+            }
+        </div>
+
+        <form class="login-form" id="loginForm" asp-action="Index" method="post">
+            <div class="input-group">
+                <input type="text" class="input-field" name="usuario" placeholder="Nombre de usuario" id="username" required>
+                <div class="input-icon icon-user"></div>
+            </div>
+
+            <div class="input-group">
+                <input type="password" class="input-field" placeholder="Contraseña" id="password" name="password" required>
+                <div class="input-icon icon-lock"></div>
+            </div>
+
+            <button type="submit" onclick="Login()" class="login-btn">
+                <span class="btn-text">Iniciar Sesión</span>
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <!--
+                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+            -->
+        </div>
+    </div>
+
+    <script> 
+        function Login()
+        {
+            let user  = $("#username").val();
+            let pass  = $("#password").val();
+            if(user !== "" && pass!== "")
+            {
+                const btn = document.querySelector('.login-btn');
+                const btnText = document.querySelector('.btn-text');
+                const loading = document.querySelector('.loading');
+
+                // Mostrar estado de carga
+                btnText.style.opacity = '0';
+                loading.style.display = 'block';
+                btn.style.pointerEvents = 'none';
+            }
+        }
+
+        // Efectos de foco en inputs
+        document.querySelectorAll('.input-field').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+
+        // Validación en tiempo real
+        document.getElementById('username').addEventListener('input', function() {
+            if (this.value.length >= 3) {
+                this.style.borderColor = '#4CAF50';
+            } else {
+                this.style.borderColor = '#E0E0E0';
+            }
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            if (this.value.length >= 6) {
+                this.style.borderColor = '#4CAF50';
+            } else {
+                this.style.borderColor = '#E0E0E0';
+            }
+        });
+    </script>
+</body>
+</html>
+

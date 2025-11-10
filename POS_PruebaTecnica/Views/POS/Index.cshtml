@@ -1,0 +1,74 @@
+﻿@model List<POS_PruebaTecnica.Models.POS.Sales>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>POS</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus"></i>Crear</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                nkey
+            </th> 
+            <th>
+                Tienda
+            </th> 
+            <th>
+               Fecha
+            </th> 
+            <th>
+               Tipo
+            </th> 
+            <th>
+                MontoNeto
+            </th>
+            <th>MontoIVA
+            </th>
+            <th>
+                MontoGrav
+            </th>
+            <th>
+                Anulado
+            </th> 
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Select(x=>x.cabecera)) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nkey)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.idTienda)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.fechahora)
+            </td> 
+            <td>
+                Factura
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.montoNeto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.montoIVA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.montoGrav)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.invalidado)
+            </td> 
+            <td>
+                    @Html.ActionLink("Detalle", "Details", new { id = item.id}, new { @class = "btn btn-info" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

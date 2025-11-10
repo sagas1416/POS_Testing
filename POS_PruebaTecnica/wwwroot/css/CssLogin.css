@@ -1,0 +1,321 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 25%, #81C784 50%, #A5D6A7 75%, #C8E6C9 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animación de fondo con partículas */
+.bg-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 8s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Contenedor principal */
+.login-container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    padding: 50px 40px;
+    width: 450px;
+    max-width: 90vw;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(-10px);
+    animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Header con logo */
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-container {
+    width: 270px;
+    height: 150px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #A5D6A7, #3fb945);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(76, 175, 80, 0.6);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+    }
+}
+
+.logo-placeholder {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.system-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2E7D32;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #2E7D32, #4CAF50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.system-subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Formulario */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 18px 25px 18px 55px;
+    border: 2px solid #E0E0E0;
+    border-radius: 15px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+    .input-field:focus {
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        transform: translateY(-2px);
+    }
+
+.input-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4CAF50;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.input-field:focus + .input-icon {
+    color: #2E7D32;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Botón de login */
+.login-btn {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+    .login-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .login-btn:hover::before {
+        left: 100%;
+    }
+
+    .login-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
+    }
+
+    .login-btn:active {
+        transform: translateY(-1px);
+    }
+
+/* Enlaces adicionales */
+.login-footer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.forgot-password {
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+    .forgot-password:hover {
+        color: #2E7D32;
+        text-decoration: underline;
+    }
+
+/* Efectos de carga */
+.loading {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner {
+    width: 25px;
+    height: 25px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 25px;
+        margin: 20px;
+    }
+
+    .system-title {
+        font-size: 24px;
+    }
+
+    .input-field {
+        padding: 15px 20px 15px 50px;
+        font-size: 14px;
+    }
+
+    .login-btn {
+        padding: 15px;
+        font-size: 16px;
+    }
+}
+
+/* Iconos personalizados usando CSS */
+.icon-user::before {
+    content: "👤";
+}
+
+.icon-lock::before {
+    content: "🔒";
+}
+
+/* Mensaje de bienvenida */
+.welcome-message {
+    background: linear-gradient(135deg, #E8F5E8, #F1F8E9);
+    border-left: 4px solid #4CAF50;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    color: #2E7D32;
+    font-size: 14px;
+}
+.error-message {
+    background: linear-gradient(135deg, #fa4040, #be0000);
+    border-left: 4px solid #fc7373;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    color: #f8e7e7;
+    font-size: 14px;
+}

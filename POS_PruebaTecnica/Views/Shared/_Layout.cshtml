@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    string? Controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    string? action = ViewContext.RouteData.Values["action"]?.ToString();
+
+    string Usuario = HttpContextAccessor.HttpContext.Session.GetString("Usuario");
+    int? Permiso = HttpContextAccessor.HttpContext.Session.GetInt32("Permiso"); 
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - POS_PruebaTecnica</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="~/POS_PruebaTecnica.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="">POS</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if (Permiso == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Productos" asp-action="Index">Productos</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="POS" asp-action="Index">Punto de venta</a>
+                        </li>
+                    </ul>
+                    <ul class="form-inline my-2 my-lg-0 btn btn-secondary"> 
+                        <li class="nav-item topbar-user dropdown hidden-caret">
+                            <a  class="dropdown-toggle "
+                               data-bs-toggle="dropdown"
+                               href="#" style="text-decoration:none; color:white !important"
+                               aria-expanded="false">
+                                <span>Hola,@Usuario</span>
+                            </a>
+                            <ul class="nav-item dropdown-menu">
+                                <li>
+                                    <div class="alert alert-info">
+                                        <div class="u-text">
+                                            <h9>@Usuario</h9>
+                                            <span>@(Permiso == 1 ? "ADMINISTRADOR" : Permiso == 2 ? "CONTADOR" : Permiso == 3 ? "CAJERO" : Permiso == 5 ? "ENCARGADO" : "VENDEDOR MOSTRADOR")</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li> 
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="~/Login/Cerrar"><i class="fa-solid fa-right-from-bracket me-3"></i>Salir</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; @DateTime.Now.Year - POS 
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sweetalert2@11.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(function () {
+            var message = '@ViewBag.Mensaje';
+            if (message != '') {
+                if (message.includes("Error-"))
+                    Swal.fire('ERROR', message, 'error')
+                else if (message.includes("RECHAZADO") || message.includes("ERROR"))
+                    Swal.fire('Error', message, 'warning')
+                else if (message.includes("Adv-"))
+                    Swal.fire('ADVERTENCIA', message, 'warning')
+                else
+                    Swal.fire('COMPLETADO', message, 'success')
+            }
+        });
+    </script>
+</body>
+</html>
